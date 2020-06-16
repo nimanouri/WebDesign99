@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Session11.css">
+    <title>Session 11 Exercises</title>
+    <script>
+        const getProducts = () => {
+            const apiUrl = "http://apitester.ir/api/Products";
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => generateTableRows(data));
+        };
+
+        getProducts();
+
+        const generateTableRows = (items) => {
+            document.querySelector("#productsTable tbody").innerHTML = '';
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const row = document.createElement("tr");
+                row.innerHTML = `<tr>
+                <td>${item.productId}</td>
+                <td>${item.productName}</td>
+                <td>${item.unitPrice}</td>
+                <td>${item.categoryId}</td>
+                <td>${item.categoryName}</td>
+                <td>${item.supplierId}</td>
+                <td>${item.supplierName}</td>
+            </tr>`;
+
+                document.querySelector("#productsTable tbody").append(row);
+            }
+            document.getElementById("loading").remove();
+        };
+        const generateListItems = (items) => {
+            document.querySelector("#listView").innerHTML = '';
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const myList = document.createElement("div");
+                myList.innerHTML = `<div class="flex-container"><ul class="list-group col centered">
+                    <li class="list-group-item list-group-item-info">Product ID: ${item.productId}</li>
+                    <li class="list-group-item">Product Name: ${item.productName}</li>
+                    <li class="list-group-item">Unit Price: ${item.unitPrice}</li>
+                    <li class="list-group-item">Category ID: ${item.categoryId}</li>
+                    <li class="list-group-item">Category Name: ${item.categoryName}</li>
+                    <li class="list-group-item">Supplier ID: ${item.supplierId}</li>
+                    <li class="list-group-item">Supplier Name: ${item.supplierName}</li>
+                    
+                </ul>
+                </div>`;
+
+                document.querySelector("#listView").append(myList);
+            }
+            document.getElementById("loading").remove();
+        };
+        const getProductslist = () => {
+            const apiUrl = "http://apitester.ir/api/Products";
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => generateListItems(data));
+        };
+
+        getProductslist();
+    </script>
+</head>
+
+<body>
+    <header>
+        <h2>Session 11 Exercises</h1>
+    </header>
+
+    <main>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1>CRUD using API</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                Create
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Title</h5>
+                                <p class="card-text">Content</p>
+                            </div>
+                        </div>
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                Read
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Title</h5>
+                                <p class="card-text">Content</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                Update
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Title</h5>
+                                <p class="card-text">Content</p>
+                            </div>
+                        </div>
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                Delete
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Title</h5>
+                                <p class="card-text">Content</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table id="productsTable" class="table table-light table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Product ID</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Category ID</th>
+                                    <th scope="col">Category Name</th>
+                                    <th scope="col">Supplier ID</th>
+                                    <th scope="col">Supplier Name</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="listView" class="row">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        Session 11 Exercises
+    </footer>
+</body>
+
+</html>
